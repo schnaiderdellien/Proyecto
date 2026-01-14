@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/proyecto/includes/db.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/proyecto/config.pw.php';
 ?>
 
 <?php
@@ -45,8 +46,8 @@ if ($email) {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'schnaiderdellienasir@gmail.com';
-            $mail->Password   = 'debcadjzhjmuejws';
+            $mail->Username   = $usuarioCorreo;
+            $mail->Password   = $passCorreo;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
         
