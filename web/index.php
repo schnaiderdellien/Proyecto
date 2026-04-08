@@ -1,4 +1,12 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // -------------------------------------------------------------
 // Front Controller del mini-framework
 // -------------------------------------------------------------
@@ -25,12 +33,14 @@ $session->checkSecurity();
 // Mapa de rutas
 // -------------------------------------------------------------
 $map = [
-  
-    'inicio'            => ['controller' => 'InicioController',        'action'         => 'inicio',          'nivel' => 0],
-    'login'             => ['controller' => 'AuthController',          'action'         => 'login',           'nivel' => 0],
-    'logout'            => ['controller' => 'AuthController',          'action'         => 'logout',          'nivel' => 1],
-    'dashboard'         => ['controller' => 'DashboardController',      'action'        => 'index',            'nivel'=> 1],
-    
+    'inicio'    => ['controller' => 'InicioController',    'action' => 'inicio',    'nivel' => 0],
+    'login'     => ['controller' => 'AuthController',      'action' => 'login',     'nivel' => 0],
+    'logout'    => ['controller' => 'AuthController',      'action' => 'logout',    'nivel' => 1],
+    'dashboard' => ['controller' => 'DashboardController', 'action' => 'index',     'nivel' => 1],
+    'clientes'  => ['controller' => 'ClienteController',   'action' => 'clientes',  'nivel' => 1],
+    'api_clientes'  => ['controller' => 'ClienteController',   'action' => 'apiClientes',  'nivel' => 1],
+    'productos' => ['controller' => 'ProductosController', 'action' => 'productos', 'nivel' => 1],
+
 ];
 
 // -------------------------------------------------------------

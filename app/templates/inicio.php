@@ -10,6 +10,8 @@
         <?= htmlspecialchars($params['mensaje2']) ?>
     </p>
 
+    <p> <?= htmlspecialchars($params['pass']??'')?> </p>
+
 </div>
 
 <?php $contenido = ob_get_clean(); ?>
