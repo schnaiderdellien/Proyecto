@@ -22,6 +22,11 @@
     </div>
 </nav>
 
+<?php
+/** @var string $contenido */
+/** @var array $params */
+?> <!-- Para quitar el aviso del params y $contenido -->
+
 <div class="container mt-5">
     <?= $contenido ?>
 </div>

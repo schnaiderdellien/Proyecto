@@ -1,6 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="text-center">
+    <?php /** @var array $params */ ?> <!-- Para quitar el aviso del params -->
 
     <h4 class="text-muted"><?= htmlspecialchars($params['fecha']) ?></h4>
 

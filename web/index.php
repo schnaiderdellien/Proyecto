@@ -40,6 +40,11 @@ $map = [
     'clientes'  => ['controller' => 'ClienteController',   'action' => 'clientes',  'nivel' => 1],
     'api_clientes'  => ['controller' => 'ClienteController',   'action' => 'apiClientes',  'nivel' => 1],
     'productos' => ['controller' => 'ProductosController', 'action' => 'productos', 'nivel' => 1],
+    'api_productos'  => ['controller' => 'ProductosController',   'action' => 'apiProductos',  'nivel' => 1],
+    'api_comerciales'  => ['controller' => 'ClienteController',   'action' => 'apiComerciales',  'nivel' => 1],
+    'api_metodo_pago'  => ['controller' => 'ClienteController',   'action' => 'apiMetodosPago',  'nivel' => 1],
+    'api_impuestos'  => ['controller' => 'ClienteController',   'action' => 'apiImpuestos',  'nivel' => 1],
+    'editarCliente' => ['controller' => 'ClienteController', 'action' => 'editarCliente', 'nivel' => 1],
 
 ];
 

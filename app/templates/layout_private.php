@@ -15,6 +15,11 @@
 
 <body id="page-top">
 
+<?php
+/** @var string $contenido */
+/** @var array $params */
+?> <!-- Para quitar el aviso del params -->
+
 <?= $contenido ?>
 
 <!-- Scroll to Top Button-->
