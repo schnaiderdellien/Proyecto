@@ -70,7 +70,7 @@
 
             <div class="modal-content">
 
-                <form method="POST" action="index.php?ctl=guardarCliente">
+                <form id="formNuevoCliente" method="POST" action="index.php?ctl=guardarCliente">
 
                     <div class="modal-header">
                         <h5 class="modal-title">Nuevo Cliente</h5>
@@ -171,7 +171,7 @@
     <div class="modal fade" id="modalClienteEditar" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="index.php?ctl=editarCliente">
+                <form  id="formEditarCliente" method="POST" action="index.php?ctl=editarCliente">
                     <input type="hidden" name="id_cliente" id="edit_id_hidden">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar Cliente</h5>

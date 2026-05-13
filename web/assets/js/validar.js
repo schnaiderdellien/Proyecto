@@ -146,3 +146,16 @@ function validarDNI(input) {
 
   return true;
 }
+// RESETEAR FORMULARIO
+
+function resetearFormulario(formularioId) {
+  const formulario = document.getElementById(formularioId);
+
+  if (!formulario) return;
+
+  // LIMPIAR FORMULARIO
+  formulario.reset();
+
+  // LIMPIAR ERRORES
+  limpiarErrores(formulario);
+}

@@ -62,7 +62,7 @@
 
             <div class="modal-content">
 
-                <form method="POST" action="index.php?ctl=guardarProducto">
+                <form id="formNuevoProducto" method="POST" action="index.php?ctl=guardarProducto">
 
                     <div class="modal-header"><h5 class="modal-title">Nuevo Producto</h5></div>
                     <div class="modal-body">
@@ -153,7 +153,7 @@
 
             <div class="modal-content">
 
-                <form method="POST" action="index.php?ctl=editarProducto">
+                <form  id="formEditarProducto" method="POST" action="index.php?ctl=editarProducto">
 
                     <input type="hidden" name="id_productos"id="edit_id_hidden">
 

@@ -387,6 +387,137 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#modalClienteNuevo").modal("show");
   }
 
+  // validar formulario de nuevo cliente
+  const formNuevoCliente = document.getElementById("formNuevoCliente");
+
+  formNuevoCliente.addEventListener("submit", (e) => {
+    limpiarErrores(formNuevoCliente);
+
+    let valido = true;
+
+    valido = validarDNI(document.getElementById("nuevo_documento")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_nombre"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_apellido1"), 2, 50) && valido;
+
+    const apellido2 = document.getElementById("nuevo_apellido2");
+
+    if (apellido2.value.trim() !== "") {
+      valido = validarTexto(apellido2, 2, 50) && valido;
+    }
+
+    valido = validarEmail(document.getElementById("nuevo_email")) && valido;
+
+    valido =
+      validarTelefono(document.getElementById("nuevo_telefono")) && valido;
+
+    const fechaNacimiento = document.getElementById("nuevo_fecha_nacimiento");
+
+    if (fechaNacimiento.value !== "") {
+      valido = validarFecha(fechaNacimiento) && valido;
+    }
+
+    valido =
+      validarTexto(document.getElementById("nuevo_direccion"), 2, 100) &&
+      valido;
+
+    valido = validarNumero(document.getElementById("nuevo_cp")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_ciudad"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_pais"), 2, 50) && valido;
+
+    valido = validarDecimal(document.getElementById("nuevo_credito")) && valido;
+
+    valido =
+      validarFecha(document.getElementById("nuevo_fecha_alta")) && valido;
+
+    valido =
+      validarSelect(document.getElementById("nuevo_metodo_pago")) && valido;
+
+    valido = validarSelect(document.getElementById("nuevo_impuesto")) && valido;
+
+    valido = validarSelect(document.getElementById("nuevo_usuario")) && valido;
+
+    valido = validarSelect(document.getElementById("nuevo_estado")) && valido;
+
+    // No validamos fecha de baja porque se asigna automáticamente al dar de baja a un cliente
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  // validar formulario de editar cliente
+  const formEditarCliente = document.getElementById("formEditarCliente");
+
+  formEditarCliente.addEventListener("submit", (e) => {
+    limpiarErrores(formEditarCliente);
+
+    let valido = true;
+
+    valido = validarDNI(document.getElementById("edit_documento")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_nombre"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_apellido1"), 2, 50) && valido;
+
+    const apellido2 = document.getElementById("edit_apellido2");
+
+    if (apellido2.value.trim() !== "") {
+      valido = validarTexto(apellido2, 2, 50) && valido;
+    }
+
+    valido = validarEmail(document.getElementById("edit_email")) && valido;
+
+    valido =
+      validarTelefono(document.getElementById("edit_telefono")) && valido;
+
+    const fechaNacimiento = document.getElementById("edit_fecha_nacimiento");
+
+    if (fechaNacimiento.value !== "") {
+      valido = validarFecha(fechaNacimiento) && valido;
+    }
+
+    valido =
+      validarTexto(document.getElementById("edit_direccion"), 2, 100) && valido;
+
+    valido = validarNumero(document.getElementById("edit_cp")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_ciudad"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_pais"), 2, 50) && valido;
+
+    valido = validarDecimal(document.getElementById("edit_credito")) && valido;
+
+    valido = validarFecha(document.getElementById("edit_fecha_alta")) && valido;
+
+    valido = validarSelect(document.getElementById("edit_estado")) && valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  // Resetear formularios al cerrar modales
+
+  $("#modalClienteNuevo").on("hidden.bs.modal", function () {
+    resetearFormulario("formNuevoCliente");
+  });
+
+  $("#modalClienteEditar").on("hidden.bs.modal", function () {
+    resetearFormulario("formEditarCliente");
+  });
+
   // Escuchador para botones de editar
 
   document.addEventListener("click", (event) => {

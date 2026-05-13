@@ -392,6 +392,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Resetear formularios al cerrar modales
+
+  $("#modalProductoNuevo").on("hidden.bs.modal", function () {
+    resetearFormulario("formNuevoProducto");
+  });
+
+  $("#modalProductoEditar").on("hidden.bs.modal", function () {
+    resetearFormulario("formEditarProducto");
+  });
+
+  // Escuchadores para botones de editar y ver
+
   document.addEventListener("click", (event) => {
     const btn = event.target.closest(".btn-editar");
 
