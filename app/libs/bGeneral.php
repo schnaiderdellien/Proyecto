@@ -157,6 +157,23 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     return false;
 }
 
+function cTextoProducto(
+    string $text,
+    string $campo,
+    array &$errores,
+    int $max = 50,
+    int $min = 1
+): bool {
+
+    if (preg_match('/^[a-zA-Z0-9 ñáéíóúÁÉÍÓÚ._,-]{'.$min.','.$max.'}$/u', $text)) {
+        return true;
+    }
+
+    $errores[$campo] = "Error en el campo $campo";
+
+    return false;
+}
+
 
 /**
  * Funcion cUser
@@ -231,6 +248,23 @@ function cNum(string $num, string $campo, array &$errores, bool $requerido = TRU
         if ($num <= $max) return true;
     }
     $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
+function cDecimal(
+    string $num,
+    string $campo,
+    array &$errores
+): bool {
+
+    if (preg_match('/^\d+(\.\d{1,2})?$/', $num)) {
+
+        return true;
+
+    }
+
+    $errores[$campo] = "El campo $campo debe ser decimal válido";
+
     return false;
 }
 

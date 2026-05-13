@@ -34,6 +34,7 @@
 <script src="/proyecto/web/assets/js/sb-admin-2.min.js"></script>
 <script src="/proyecto/web/assets/vendor/chart.js/Chart.min.js"></script>
 <?php if (!empty($params['js'])): ?>
+    <script src="/proyecto/web/assets/js/validar.js"></script>
     <script src="/proyecto/web/assets/js/<?= $params['js'] ?>"></script>
 <?php endif; ?>
 

@@ -1,15 +1,15 @@
 <?php
 
-class Comerciales {
+class RolesUser {
     private PDO $conexion;
 
     public function __construct() {
         $this->conexion = Database::getConnection();
     }
 
-    public function getByCommercial(): array {
+    public function getByRole(): array {
         try {
-            $sql = "SELECT id_usuario, nombre FROM usuarios WHERE id_rol = 1";
+            $sql = "SELECT * FROM Rol";
             $stmt = $this->conexion->query($sql);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Throwable $e) {

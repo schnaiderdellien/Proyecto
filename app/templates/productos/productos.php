@@ -9,13 +9,7 @@
 
     <h1 class="h3 mb-4 text-gray-800">Productos</h1>
 
-    <?php /** @var array $params */ ?><!-- Para quitar el aviso del params -->
-
-    <?php if ($params['rol'] == 1 || $params['rol'] == 2): ?>
-        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalProducto">
-            Nuevo Producto
-        </button>
-    <?php endif; ?>
+    <div id="contenedor-boton-nuevo"></div>
 
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -60,28 +54,62 @@
 
         </div>
     </div>
+    
 
     <!-- MODAL NUEVO -->
-    <div class="modal fade" id="modalProducto" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="modalProductoNuevo" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+
             <div class="modal-content">
+
                 <form method="POST" action="index.php?ctl=guardarProducto">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Nuevo Producto</h5>
-                    </div>
+
+                    <div class="modal-header"><h5 class="modal-title">Nuevo Producto</h5></div>
                     <div class="modal-body">
-                        <input type="text" name="sku" class="form-control mb-2" placeholder="SKU" required>
-                        <input type="text" name="nombre" class="form-control mb-2" placeholder="Nombre" required>
-                        <input type="text" name="modelo" class="form-control mb-2" placeholder="Modelo">
-                        <input type="number" name="precio_coste" class="form-control mb-2" placeholder="Precio coste">
-                        <input type="number" name="precio_venta" class="form-control mb-2" placeholder="Precio venta">
-                        <input type="number" name="stock" class="form-control mb-2" placeholder="Stock">
+                        <p><b>SKU:</b><input type="text"name="sku" id="nuevo_sku"class="form-control mb-2"placeholder="SKU"></p>
+                        <p><b>Nombre:</b><input type="text" name="nombre"id="nuevo_nombre"class="form-control mb-2"placeholder="Nombre"></p>
+                        <p><b>Descripción corta:</b><input type="text" name="descripcion_corta"id="nuevo_desc_corta"class="form-control mb-2"placeholder="Descripción corta"></p>
+                        <p><b>Descripción larga:</b><textarea name="descripcion_larga"id="nuevo_desc_larga"class="form-control mb-2" placeholder="Descripción larga"></textarea></p>
+                        <hr>
+                        <p><b>Modelo:</b><input type="text"name="modelo" id="nuevo_modelo"class="form-control mb-2"placeholder="Modelo"></p>
+                        <p><b>Precio coste:</b><input type="number"step="0.01"name="precio_coste"id="nuevo_precio_coste" class="form-control mb-2"placeholder="Precio coste"></p>
+                        <p><b>Precio venta:</b><input type="number"step="0.01"name="precio_venta"id="nuevo_precio_venta"class="form-control mb-2"placeholder="Precio venta"></p>
+                        <p><b>Moneda:</b><input type="text"name="moneda"id="nuevo_moneda"class="form-control mb-2" placeholder="Moneda"></p>
+                        <hr>
+                        <p><b>Stock:</b><input type="number"name="stock"id="nuevo_stock"class="form-control mb-2" placeholder="Stock"></p>
+                        <p><b>Stock mínimo:</b><input type="number"name="stock_minimo"id="nuevo_stock_min"class="form-control mb-2"placeholder="Stock mínimo">
+                        </p>
+                        <p><b>Stock máximo:</b><input type="number"name="stock_maximo" id="nuevo_stock_max"class="form-control mb-2"placeholder="Stock máximo"> </p>
+                        <hr>
+                        <p><b>Estado:</b>
+                        <select name="id_estado"id="nuevo_estado"class="form-control mb-2">
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                        </p>
+                        <p><b>Fecha alta:</b>
+                        <input type="date"name="fecha_alta"id="nuevo_fecha_alta"class="form-control mb-2">
+                        </p>
+                        <p><b>Fecha baja:</b><p id="nuevo_fecha_baja"class="form-control mb-2">-</p></p>
+
                     </div>
+
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Guardar</button>
+
+                        <button type="submit"class="btn btn-success">
+                            Guardar
+                        </button>
+
+                        <button type="button"class="btn btn-secondary"data-dismiss="modal">
+                            Cerrar
+                        </button>
+
                     </div>
+
                 </form>
+
             </div>
+
         </div>
     </div>
 
@@ -116,6 +144,69 @@
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR -->
+    <div class="modal fade" id="modalProductoEditar" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+                <form method="POST" action="index.php?ctl=editarProducto">
+
+                    <input type="hidden" name="id_productos"id="edit_id_hidden">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Producto</h5>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p><b>ID:</b><span id="edit_id"></span></p>
+                        <p><b>SKU:</b><input type="text" name="sku"id="edit_sku"class="form-control mb-2"></p>
+                        <p><b>Nombre:</b><input type="text"name="nombre"id="edit_nombre" class="form-control mb-2"></p>
+                        <p><b>Descripción corta:</b><input type="text"name="descripcion_corta" id="edit_desc_corta" class="form-control mb-2"></p>
+                        <p><b>Descripción larga:</b><textarea name="descripcion_larga" id="edit_desc_larga" class="form-control mb-2"></textarea> </p>
+                        <hr>
+                        <p><b>Modelo:</b><input type="text" name="modelo" id="edit_modelo" class="form-control mb-2"></p>
+                        <p><b>Precio coste:</b><input type="number"step="0.01"name="precio_coste"id="edit_precio_coste" class="form-control mb-2"></p>
+                        <p><b>Precio venta:</b><input type="number"step="0.01" name="precio_venta"id="edit_precio_venta"class="form-control mb-2"></p>
+                        <p><b>Moneda:</b><input type="text"name="moneda"id="edit_moneda"class="form-control mb-2"></p>
+                        <hr><p><b>Stock:</b><input type="number"name="stock"id="edit_stock"class="form-control mb-2"></p>
+                        <p><b>Stock mínimo:</b><input type="number" name="stock_minimo" id="edit_stock_min" class="form-control mb-2"></p>
+                        <p><b>Stock máximo:</b><input type="number" name="stock_maximo" id="edit_stock_max" class="form-control mb-2"></p>
+                        <hr>
+                        <p><b>Estado:</b>
+                            <select name="id_estado"id="edit_estado" class="form-control mb-2">
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                            </select>
+                        </p>
+                        <p><b>Fecha alta:</b><input type="date"name="fecha_alta"id="edit_fecha_alta" class="form-control mb-2"></p>
+                        <p><b>Fecha baja:</b> <p type="date" name="fecha_baja"id="edit_fecha_baja"class="form-control mb-2"> - </p></p>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="submit"
+                                class="btn btn-success">
+                            Guardar
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal">
+                            Cerrar
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
         </div>
     </div>
 

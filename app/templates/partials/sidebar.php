@@ -55,6 +55,18 @@
         </a>
     </li>
 
+    <?php if (($_SESSION['usuarioNivel'] ?? 0) == 4): ?>
+
+        <!-- Usuarios -->
+        <li class="nav-item">
+            <a class="nav-link" href="index.php?ctl=usuarios">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Usuarios</span>
+            </a>
+        </li>
+
+    <?php endif; ?>
+
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Toggle -->

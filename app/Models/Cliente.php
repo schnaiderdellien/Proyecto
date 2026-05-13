@@ -11,7 +11,7 @@ class Cliente {
         try {
     
             // Ver todo
-            if ($rol == 1 || $rol == 2) {
+            if ($rol == 3 || $rol == 4) {
                 //$sql = "SELECT * FROM clientes c JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY id_cliente ASC";
                 $sql = "SELECT c.*, u.nombre as nombre_comercial, i.impuesto as nombre_impuesto, p.metodo_pago as nombre_metodo_pago 
                         FROM clientes c 
@@ -19,10 +19,21 @@ class Cliente {
                         JOIN Impuestos i ON c.id_impuesto = i.id_impuesto
                         JOIN Metodo_pago p ON c.id_metodo_pago = p.id_metodo_pago
                         ORDER BY c.id_cliente ASC";
+                        
                 $stmt = $this->conexion->query($sql);
             } else {
                 // Comercial
-                $sql = "SELECT * FROM clientes WHERE id_usuario = :id ORDER BY id_cliente ASC";
+                $sql = "SELECT c.*, 
+                        u.nombre as nombre_comercial,
+                        i.impuesto as nombre_impuesto,
+                        p.metodo_pago as nombre_metodo_pago
+                    FROM clientes c
+                    JOIN usuarios u ON c.id_usuario = u.id_usuario
+                    JOIN Impuestos i ON c.id_impuesto = i.id_impuesto
+                    JOIN Metodo_pago p ON c.id_metodo_pago = p.id_metodo_pago
+                    WHERE c.id_usuario = :id
+                    ORDER BY c.id_cliente ASC";
+
                 $stmt = $this->conexion->prepare($sql);
                 $stmt->execute([':id' => $idUsuario]);
             }
@@ -79,6 +90,79 @@ class Cliente {
                 ':id_usuario'    => $datos['id_usuario'],
                 ':id'            => $id
             ]);
+        } catch (Throwable $e) {
+            throw $e;
+        }
+    }
+
+    // Método para insertar un nuevo cliente
+
+    public function insert(array $datos): void {
+        try {
+
+            $sql = "INSERT INTO clientes (
+                        nombreCliente,
+                        apellido1,
+                        apellido2,
+                        documento,
+                        emailCliente,
+                        telefono,
+                        fecha_de_nacimiento,
+                        direccion,
+                        cp,
+                        ciudad,
+                        pais,
+                        id_metodo_pago,
+                        id_impuesto,
+                        credito,
+                        id_estado,
+                        fecha_de_alta,
+                        fecha_de_baja,
+                        id_usuario
+                    ) VALUES (
+                        :nombre,
+                        :apellido1,
+                        :apellido2,
+                        :documento,
+                        :email,
+                        :telefono,
+                        :fecha_nacimiento,
+                        :direccion,
+                        :cp,
+                        :ciudad,
+                        :pais,
+                        :id_metodo_pago,
+                        :id_impuesto,
+                        :credito,
+                        :id_estado,
+                        :fecha_alta,
+                        :fecha_baja,
+                        :id_usuario
+                    )";
+
+            $stmt = $this->conexion->prepare($sql);
+
+            $stmt->execute([
+                ':nombre'            => $datos['nombre'],
+                ':apellido1'         => $datos['apellido1'],
+                ':apellido2'         => $datos['apellido2'],
+                ':documento'         => $datos['documento'],
+                ':email'             => $datos['email'],
+                ':telefono'          => $datos['telefono'],
+                ':fecha_nacimiento'  => $datos['fecha_nacimiento'],
+                ':direccion'         => $datos['direccion'],
+                ':cp'                => $datos['cp'],
+                ':ciudad'            => $datos['ciudad'],
+                ':pais'              => $datos['pais'],
+                ':id_metodo_pago'    => $datos['id_metodo_pago'],
+                ':id_impuesto'       => $datos['id_impuesto'],
+                ':credito'           => $datos['credito'],
+                ':id_estado'         => $datos['id_estado'],
+                ':fecha_alta'        => $datos['fecha_alta'],
+                ':fecha_baja'        => $datos['fecha_baja'],
+                ':id_usuario'        => $datos['id_usuario']
+            ]);
+
         } catch (Throwable $e) {
             throw $e;
         }

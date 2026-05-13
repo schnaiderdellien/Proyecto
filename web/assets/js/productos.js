@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let ordenActual = { campo: null, asc: true };
   let paginaActual = 1;
   const porPagina = 10;
+  // FUNCIONES
 
+  // función para cargar productos desde la API
   async function cargarProductos() {
     try {
       const response = await fetch("index.php?ctl=api_productos");
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productos = result.data;
       productosFiltrados = productos;
       userLevel = result.userLevel;
+      renderizarBotonNuevo();
 
       paginar(productosFiltrados);
     } catch (error) {
@@ -26,12 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // función para renderizar la tabla de productos
   function renderizarTabla(data) {
     tabla.innerHTML = "";
 
     data.forEach((producto) => {
       const botonEditar =
-        userLevel == 1 || userLevel == 2
+        userLevel == 3 || userLevel == 4
           ? `<a href="#" class="btn btn-warning btn-sm btn-editar" data-id="${producto.id_productos}"><i class="fas fa-edit"></i></a>`
           : "";
 
@@ -55,6 +59,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //para que se ve el botón de nuevo producto solo a los niveles 3 y 4
+
+  function renderizarBotonNuevo() {
+    const contenedor = document.getElementById("contenedor-boton-nuevo");
+
+    if (userLevel == 3 || userLevel == 4) {
+      contenedor.innerHTML = `
+            <button class="btn btn-primary mb-3" id="btnNuevoProducto">
+                Nuevo producto
+            </button>
+        `;
+
+      document
+        .getElementById("btnNuevoProducto")
+        .addEventListener("click", abrirModalNuevo);
+    }
+  }
+
+  // paginador
   function paginar(data) {
     const totalPaginas = Math.ceil(data.length / porPagina);
     const inicio = (paginaActual - 1) * porPagina;
@@ -108,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // buscadores y filtros
   buscador.addEventListener("keyup", () => {
     const texto = buscador.value.toLowerCase();
 
@@ -115,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (p) =>
         p.sku.toLowerCase().includes(texto) ||
         p.nombre.toLowerCase().includes(texto) ||
-        p.modelo.toLowerCase().includes(texto)
+        p.modelo.toLowerCase().includes(texto),
     );
     paginaActual = 1;
     paginar(productosFiltrados);
@@ -125,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const numero = buscadorPrecio.value;
 
     productosFiltrados = productos.filter((p) =>
-      String(p.precio_venta).includes(numero)
+      String(p.precio_venta).includes(numero),
     );
     paginaActual = 1;
     paginar(productosFiltrados);
@@ -135,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const estado = filtroEstado.value;
 
     productosFiltrados = productos.filter((p) =>
-      estado === "" ? true : String(p.id_estado) === estado
+      estado === "" ? true : String(p.id_estado) === estado,
     );
     paginaActual = 1;
     paginar(productosFiltrados);
@@ -177,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // función para abrir modal de ver producto
   function abrirModalVer(id) {
     const producto = productos.find((p) => p.id_productos == id);
     if (!producto) return;
@@ -208,6 +233,174 @@ document.addEventListener("DOMContentLoaded", () => {
 
     $("#modalProductoVer").modal("show");
   }
+
+  // función para abrir modal de editar producto
+
+  function abrirModalEditar(id) {
+    const producto = productos.find((p) => p.id_productos == id);
+
+    if (!producto) return;
+
+    document.getElementById("edit_id").textContent = producto.id_productos;
+    document.getElementById("edit_id_hidden").value = producto.id_productos;
+    document.getElementById("edit_sku").value = producto.sku ?? "";
+    document.getElementById("edit_nombre").value = producto.nombre ?? "";
+    document.getElementById("edit_desc_corta").value =
+      producto.descripcion_corta ?? "";
+    document.getElementById("edit_desc_larga").value =
+      producto.descripcion_larga ?? "";
+    document.getElementById("edit_modelo").value = producto.modelo ?? "";
+    document.getElementById("edit_precio_coste").value =
+      producto.precio_coste ?? "";
+    document.getElementById("edit_precio_venta").value =
+      producto.precio_venta ?? "";
+    document.getElementById("edit_moneda").value = producto.moneda ?? "";
+    document.getElementById("edit_stock").value = producto.stock ?? "";
+    document.getElementById("edit_stock_min").value =
+      producto.stock_minimo ?? "";
+    document.getElementById("edit_stock_max").value =
+      producto.stock_maximo ?? "";
+    document.getElementById("edit_fecha_alta").value =
+      producto.fecha_de_alta ?? "";
+    document.getElementById("edit_fecha_baja").value =
+      producto.fecha_de_baja ?? "-";
+    document.getElementById("edit_estado").value = producto.id_estado;
+
+    $("#modalProductoEditar").modal("show");
+  }
+
+  // FUNCIÓN PARA ABRIR MODAL NUEVO
+
+  function abrirModalNuevo() {
+    document.getElementById("nuevo_sku").value = "";
+    document.getElementById("nuevo_nombre").value = "";
+    document.getElementById("nuevo_desc_corta").value = "";
+    document.getElementById("nuevo_desc_larga").value = "";
+    document.getElementById("nuevo_modelo").value = "";
+    document.getElementById("nuevo_precio_coste").value = "";
+    document.getElementById("nuevo_precio_venta").value = "";
+    document.getElementById("nuevo_moneda").value = "EUR";
+    document.getElementById("nuevo_stock").value = "";
+    document.getElementById("nuevo_stock_min").value = "";
+    document.getElementById("nuevo_stock_max").value = "";
+    document.getElementById("nuevo_estado").value = 1;
+    document.getElementById("nuevo_fecha_alta").value = new Date()
+      .toISOString()
+      .split("T")[0];
+
+    document.getElementById("nuevo_fecha_baja").textContent = "-";
+
+    $("#modalProductoNuevo").modal("show");
+  }
+
+  // validaciones para el formulario de nuevo producto
+
+  const formNuevoProducto = document.querySelector("#modalProductoNuevo form");
+
+  formNuevoProducto.addEventListener("submit", (e) => {
+    limpiarErrores(formNuevoProducto);
+
+    let valido = true;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_sku"), 2, 30) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_nombre"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_desc_corta"), 2, 100) &&
+      valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_desc_larga"), 2, 200) &&
+      valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_modelo"), 1, 50) && valido;
+
+    valido =
+      validarDecimal(document.getElementById("nuevo_precio_coste")) && valido;
+
+    valido =
+      validarDecimal(document.getElementById("nuevo_precio_venta")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_moneda"), 1, 10) && valido;
+
+    valido = validarNumero(document.getElementById("nuevo_stock")) && valido;
+
+    valido =
+      validarNumero(document.getElementById("nuevo_stock_min")) && valido;
+
+    valido =
+      validarNumero(document.getElementById("nuevo_stock_max")) && valido;
+
+    valido = validarSelect(document.getElementById("nuevo_estado")) && valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  // validaciones para el formulario de editar producto
+
+  const formEditarProducto = document.querySelector(
+    "#modalProductoEditar form",
+  );
+
+  formEditarProducto.addEventListener("submit", (e) => {
+    limpiarErrores(formEditarProducto);
+
+    let valido = true;
+
+    valido = validarTexto(document.getElementById("edit_sku"), 2, 30) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_nombre"), 2, 50) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_desc_corta"), 2, 100) &&
+      valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_desc_larga"), 2, 200) &&
+      valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_modelo"), 1, 50) && valido;
+
+    valido =
+      validarDecimal(document.getElementById("edit_precio_coste")) && valido;
+
+    valido =
+      validarDecimal(document.getElementById("edit_precio_venta")) && valido;
+
+    valido =
+      validarTexto(document.getElementById("edit_moneda"), 1, 10) && valido;
+
+    valido = validarNumero(document.getElementById("edit_stock")) && valido;
+
+    valido = validarNumero(document.getElementById("edit_stock_min")) && valido;
+
+    valido = validarNumero(document.getElementById("edit_stock_max")) && valido;
+
+    valido = validarSelect(document.getElementById("edit_estado")) && valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    const btn = event.target.closest(".btn-editar");
+
+    if (!btn) return;
+
+    event.preventDefault();
+
+    abrirModalEditar(btn.dataset.id);
+  });
 
   document.addEventListener("click", (event) => {
     const btn = event.target.closest(".btn-ver");

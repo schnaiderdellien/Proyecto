@@ -14,13 +14,7 @@
 
 <h1 class="h3 mb-4 text-gray-800">Clientes</h1>
 
-<?php /** @var array $params */ ?> <!-- Para quitar el aviso del params -->
-
-    <?php if ($params['rol'] == 1 || $params['rol'] == 2): ?>
-        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalCliente">
-            Nuevo cliente
-        </button>
-    <?php endif; ?>
+<div id="contenedor-boton-nuevo"></div>
 
 <div class="card shadow mb-4">
     <div class="card-body">
@@ -71,25 +65,65 @@
     </div>
 </div>
     <!-- MODAL NUEVO -->
-    <div class="modal fade" id="modalCliente" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="modalClienteNuevo" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+
             <div class="modal-content">
+
                 <form method="POST" action="index.php?ctl=guardarCliente">
+
                     <div class="modal-header">
-                        <h5 class="modal-title">Nuevo cliente</h5>
+                        <h5 class="modal-title">Nuevo Cliente</h5>
                     </div>
-                    <div class="modal-body">
-                        <input type="text" name="documento" class="form-control mb-2" placeholder="SKU" required>
-                        <input type="text" name="nombre" class="form-control mb-2" placeholder="Nombre" required>
-                        <input type="text" name="email" class="form-control mb-2" placeholder="Modelo">
-                        <input type="number" name="telefono" class="form-control mb-2" placeholder="Precio coste">
-                        <input type="number" name="id_estado" class="form-control mb-2" placeholder="Precio venta">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                    </div>
+
+                <div class="modal-body">
+
+                    <p><b>Nombre:</b><input type="text" name="nombre" id="nuevo_nombre"class="form-control mb-2" placeholder="Nombre"></p>
+                    <p><b>Primer apellido:</b><input type="text" name="apellido1" id="nuevo_apellido1"class="form-control mb-2" placeholder="Primer apellido"> </p>
+                    <p><b>Segundo apellido:</b><input type="text" name="apellido2" id="nuevo_apellido2"class="form-control mb-2" placeholder="Segundo apellido">
+                    </p>
+                    <hr>
+                    <p><b>Documento:</b><input type="text" name="documento" id="nuevo_documento"class="form-control mb-2" placeholder="Documento"> </p>
+                    <p><b>Email:</b><input type="text" name="email" id="nuevo_email"class="form-control mb-2" placeholder="Email"></p>
+                    <p><b>Teléfono:</b><input type="text" name="telefono" id="nuevo_telefono"class="form-control mb-2" placeholder="Teléfono">
+                    </p>
+                    <p><b>Fecha nacimiento:</b><input type="date" name="fecha_nacimiento" id="nuevo_fecha_nacimiento" class="form-control mb-2"></p>
+                    <hr>
+                    <p><b>Dirección:</b><input type="text" name="direccion" id="nuevo_direccion" class="form-control mb-2" placeholder="Dirección"></p>
+                    <p><b>CP:</b><input type="text" name="cp" id="nuevo_cp"class="form-control mb-2" placeholder="CP"></p>
+                    <p><b>Ciudad:</b><input type="text" name="ciudad" id="nuevo_ciudad"class="form-control mb-2" placeholder="Ciudad"> </p>
+                    <p><b>País:</b><input type="text" name="pais" id="nuevo_pais"class="form-control mb-2" placeholder="País"></p>
+                    <hr>
+                    <p><b>Método de pago:</b><select name="id_metodo_pago" id="nuevo_metodo_pago"class="form-control mb-2"></select></p>
+                    <p><b>Impuesto:</b><select name="id_impuesto" id="nuevo_impuesto"class="form-control mb-2"></select> </p>
+                    <p><b>Crédito:</b><input type="text" name="credito" id="nuevo_credito"class="form-control mb-2" placeholder="Crédito"></p>
+                    <hr>
+                    <p><b>Estado:</b>
+                        <select name="id_estado" id="nuevo_estado"
+                            class="form-control mb-2">
+                            <option value="1">Activo</option>
+                        </select>
+                    </p>
+                    <p><b>Fecha alta:</b><input type="date" name="fecha_alta" id="nuevo_fecha_alta" class="form-control mb-2"></p>
+                    <p><b>Fecha baja:</b><p type="text" name="fecha_baja" id="nuevo_fecha_baja"class="form-control mb-2">-</p></p>
+                    <p><b>Comercial:</b><select name="id_usuario" id="nuevo_usuario"class="form-control mb-2"></select></p>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        Guardar
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+
                 </form>
+
             </div>
+
         </div>
     </div>
 
@@ -164,7 +198,7 @@
                         <hr>
                         <p><b>Estado:</b><select name="id_estado" id="edit_estado" class="form-control mb-2"><option value="1">Activo</option><option value="2">Inactivo</option></select></p>
                         <p><b>Fecha alta:</b><input type="text" name="fecha_alta" id="edit_fecha_alta" class="form-control mb-2" placeholder="Fecha alta"></p>
-                        <p><b>Fecha baja:</b><input type="text" name="fecha_baja" id="edit_fecha_baja" class="form-control mb-2" placeholder="Fecha baja"></p>
+                        <p><b>Fecha baja:</b><p type="text" name="fecha_baja" id="edit_fecha_baja" class="form-control mb-2" placeholder="Fecha baja">-</p></p>
                         <p><b>Comercial:</b><select name="id_usuario" id="edit_usuario" class="form-control mb-2"></select></p>
                     </div>
                         <div class="modal-footer">

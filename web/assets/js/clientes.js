@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let metodosPago = [];
   let impuestos = [];
 
+  // Función para cargar datos de comerciales, métodos de pago e impuestos para los desplegables del modal de edición
+
   async function cargarDesplegables() {
     try {
       const resCom = await fetch("index.php?ctl=api_comerciales");
@@ -28,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Función para cargar clientes desde la API
+
   async function cargarClientes() {
     try {
       const response = await fetch("index.php?ctl=api_clientes");
@@ -35,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       clientes = result.data;
       userLevel = result.userLevel;
+      renderizarBotonNuevo();
 
       paginar(clientes);
     } catch (error) {
@@ -42,12 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Función para renderizar la tabla de clientes
   function renderizarTabla(data) {
     tabla.innerHTML = "";
 
     data.forEach((cliente) => {
       const botonEditar =
-        userLevel == 1 || userLevel == 2
+        userLevel == 3 || userLevel == 4
           ? `<a href="#" class="btn btn-warning btn-sm btn-editar" data-id="${cliente.id_cliente}"><i class="fas fa-edit"></i></a>`
           : "";
 
@@ -70,6 +76,25 @@ document.addEventListener("DOMContentLoaded", () => {
       tabla.innerHTML += fila;
     });
   }
+  // Función para renderizar el botón de "Nuevo cliente" según el nivel de usuario
+
+  function renderizarBotonNuevo() {
+    const contenedor = document.getElementById("contenedor-boton-nuevo");
+
+    if (userLevel == 3 || userLevel == 4) {
+      contenedor.innerHTML = `
+            <button class="btn btn-primary mb-3" id="btnNuevoCliente">
+                Nuevo cliente
+            </button>
+        `;
+
+      document
+        .getElementById("btnNuevoCliente")
+        .addEventListener("click", abrirModalNuevo);
+    }
+  }
+
+  // Función para paginar los datos
 
   function paginar(data) {
     const totalPaginas = Math.ceil(data.length / porPagina);
@@ -79,6 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarTabla(data.slice(inicio, fin));
     renderizarPaginador(totalPaginas, data);
   }
+
+  // Función para renderizar el paginador
 
   function renderizarPaginador(totalPaginas, data) {
     const paginador = document.getElementById("paginador");
@@ -123,6 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // Funciones para los filtros y ordenación
 
   buscador.addEventListener("keyup", () => {
     const texto = buscador.value.toLowerCase();
@@ -193,6 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Funciones para abrir modal de ver
+
   function abrirModalVer(id) {
     const cliente = clientes.find((c) => c.id_cliente == id);
     if (!cliente) return;
@@ -235,6 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     abrirModalVer(btn.dataset.id);
   });
+
+  // Función para abrir modal de edición
   function abrirModalEditar(id) {
     const cliente = clientes.find((c) => c.id_cliente == id);
     if (!cliente) return;
@@ -299,6 +332,63 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#modalClienteEditar").modal("show");
   }
 
+  function abrirModalNuevo() {
+    // LIMPIAR INPUTS
+    document.getElementById("nuevo_documento").value = "";
+    document.getElementById("nuevo_nombre").value = "";
+    document.getElementById("nuevo_apellido1").value = "";
+    document.getElementById("nuevo_apellido2").value = "";
+    document.getElementById("nuevo_email").value = "";
+    document.getElementById("nuevo_telefono").value = "";
+    document.getElementById("nuevo_fecha_nacimiento").value = "";
+    document.getElementById("nuevo_direccion").value = "";
+    document.getElementById("nuevo_cp").value = "";
+    document.getElementById("nuevo_ciudad").value = "";
+    document.getElementById("nuevo_pais").value = "";
+    document.getElementById("nuevo_credito").value = "";
+    document.getElementById("nuevo_fecha_alta").value = new Date()
+      .toISOString()
+      .split("T")[0];
+    document.getElementById("nuevo_fecha_baja").textContent = "-";
+
+    // COMERCIALES
+    const selectComercial = document.getElementById("nuevo_usuario");
+    selectComercial.innerHTML = "";
+
+    comerciales.forEach((c) => {
+      const option = document.createElement("option");
+      option.value = c.id_usuario;
+      option.textContent = c.nombre;
+      selectComercial.appendChild(option);
+    });
+
+    // MÉTODOS PAGO
+    const selectMetodo = document.getElementById("nuevo_metodo_pago");
+    selectMetodo.innerHTML = "";
+
+    metodosPago.forEach((m) => {
+      const option = document.createElement("option");
+      option.value = m.id_metodo_pago;
+      option.textContent = m.metodo_pago;
+      selectMetodo.appendChild(option);
+    });
+
+    // IMPUESTOS
+    const selectImpuesto = document.getElementById("nuevo_impuesto");
+    selectImpuesto.innerHTML = "";
+
+    impuestos.forEach((i) => {
+      const option = document.createElement("option");
+      option.value = i.id_impuesto;
+      option.textContent = i.tipo_de_impuesto;
+      selectImpuesto.appendChild(option);
+    });
+
+    $("#modalClienteNuevo").modal("show");
+  }
+
+  // Escuchador para botones de editar
+
   document.addEventListener("click", (event) => {
     const btn = event.target.closest(".btn-editar");
     if (!btn) return;
@@ -310,6 +400,5 @@ document.addEventListener("DOMContentLoaded", () => {
     await cargarDesplegables();
     await cargarClientes();
   }
-
   init();
 });
