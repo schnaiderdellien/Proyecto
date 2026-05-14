@@ -36,6 +36,7 @@ $session->checkSecurity();
 $map = [
     'inicio'    => ['controller' => 'InicioController',    'action' => 'inicio',    'nivel' => 0],
     'login'     => ['controller' => 'AuthController',      'action' => 'login',     'nivel' => 0],
+    'olvidePassword' => ['controller' => 'UsuarioController', 'action' => 'olvidePassword', 'nivel' => 0],
     'logout'    => ['controller' => 'AuthController',      'action' => 'logout',    'nivel' => 1],
     'dashboard' => ['controller' => 'DashboardController', 'action' => 'index',     'nivel' => 1],
 
@@ -58,6 +59,8 @@ $map = [
     'guardarUsuario' => ['controller' => 'UsuarioController', 'action' => 'guardarUsuario', 'nivel' => 4],
     'editarUsuario' => ['controller' => 'UsuarioController', 'action' => 'editarUsuario', 'nivel' => 4],
     'api_roles' => ['controller' => 'UsuarioController', 'action' => 'apiRoles', 'nivel' => 4],
+    'resetearPassword' => ['controller' => 'UsuarioController', 'action' => 'resetearPassword', 'nivel' => 4],
+
     
     'cambiarPassword' => ['controller' => 'UsuarioController','action' => 'cambiarPassword','nivel' => 1],
     'guardarPassword' => ['controller' => 'UsuarioController','action' => 'guardarPassword','nivel' => 1],

@@ -1,10 +1,14 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center"
        href="index.php?ctl=dashboard">
-        <div class="sidebar-brand-text mx-3">CRM Dellien</div>
+        <div class="sidebar-brand-text mx-3">    
+            <img src="/proyecto/web/assets/img/logoDellien.png"
+            alt="DELLIEN"
+            style="height: 35px;">
+        </div>
     </a>
 
     <hr class="sidebar-divider my-0">
@@ -55,6 +59,8 @@
         </a>
     </li>
 
+    <hr class="sidebar-divider">
+
     <?php if (($_SESSION['usuarioNivel'] ?? 0) == 4): ?>
 
         <!-- Usuarios -->
@@ -64,6 +70,7 @@
                 <span>Usuarios</span>
             </a>
         </li>
+
 
     <?php endif; ?>
 

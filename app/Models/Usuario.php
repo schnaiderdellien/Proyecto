@@ -84,8 +84,10 @@ class Usuario {
     return $stmt->fetch(PDO::FETCH_ASSOC);
     
 
-}
-// Método para cambiar la contraseña de un usuario
+    }
+
+
+    // Método para cambiar la contraseña de un usuario
     public function updatePassword(int $idUsuario, string $password): void {
 
         $sql = "UPDATE usuarios
@@ -99,4 +101,6 @@ class Usuario {
             ':id_usuario' => $idUsuario
         ]);
     }
+    
 }
+

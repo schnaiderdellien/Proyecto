@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
 
 <div class="container">
 
@@ -16,7 +16,9 @@
 
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">
-                                CRM DAW
+                                <img src="/proyecto/web/assets/img/logoDellienNegro.png"
+                                alt="CRM DAW"
+                                style="height: 40px;">
                             </h1>
                         </div>
 
@@ -60,7 +62,7 @@
                         </div>
 
                         <div class="text-center">
-                            <a class="small" href="index.php?ctl=restablecerPassword">
+                            <a class="small" href="index.php?ctl=olvidePassword">
                                 ¿Has olvidado tu contraseña?
                             </a>
                         </div>

@@ -122,15 +122,16 @@
 
                     <div class="modal-header"><h5 class="modal-title">Editar usuario</h5></div>
                     
-                    <div class="modal-body">
-                        <input type="text"name="nombre"id="edit_nombre"class="form-control mb-2">
-                        <input type="email"name="email"id="edit_email"class="form-control mb-2">
-                        <select name="id_rol"id="edit_rol"class="form-control mb-2"></select>
-                        <select name="id_estado"id="edit_id_estado"class="form-control mb-2">
-                            <option value="1">Activo</option>
-                            <option value="2">Inactivo</option>
-                        </select>
-                    </div>
+                        <div class="modal-body">
+                            <p><b>Nombre:</b><input type="text"name="nombre"id="edit_nombre"class="form-control mb-2"placeholder="Nombre"></p>
+                            <p><b>Email:</b><input type="email"name="email"id="edit_email" class="form-control mb-2"placeholder="Email"> </p>
+                            <p><b>Rol:</b><select name="id_rol" id="edit_rol"class="form-control mb-2"></select> </p>
+                            <p><b>Estado:</b>
+                                <select name="id_estado"id="edit_id_estado"class="form-control mb-2">
+                                    <option value="1">Activo</option>
+                                    <option value="2">Inactivo</option>
+                                </select>
+                        </div>
 
                     <div class="modal-footer">
 
@@ -139,9 +140,9 @@
                             Guardar
                         </button>
 
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Cerrar
-                        </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Cerrar
+                    </button>
 
                     </div>
 
@@ -150,6 +151,72 @@
             </div>
         </div>
     </div>
+
+<!-- MODAL RESETEAR PASSWORD -->
+
+<div class="modal fade" id="modalResetPassword" tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form id="formResetPassword"
+                  method="POST"
+                  action="index.php?ctl=resetearPassword">
+
+                <input type="hidden"
+                       name="id_usuario"
+                       id="reset_id_usuario">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Restablecer contraseña
+                    </h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <p>
+                        <b>Nueva contraseña:</b>
+
+                        <input type="password"
+                               name="password_nueva"
+                               id="reset_password"
+                               class="form-control">
+                    </p>
+
+                    <div class="alert alert-warning">
+
+                        Recordatar al usuario que cambien la contraseña al iniciar sesión.
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Actualizar contraseña
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 
 <?php $contenido = ob_get_clean(); ?>
 <?php require __DIR__ . '/../layout_private.php'; ?>

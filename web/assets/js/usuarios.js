@@ -63,7 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${usuario.email}</td>
                     <td>${usuario.rol_nombre}</td>
                     <td>${usuario.id_estado == 1 ? "Activo" : "Inactivo"}</td>
-                    <td>${botonEditar}</td>
+                    <td>${botonEditar}
+                    <a href="#"
+                      class="btn btn-danger btn-sm btn-password"
+                      data-id="${usuario.id_usuario}">
+                      <i class="fas fa-key"></i>
+                    </a>
+                    </td>
                 </tr>
             `;
     });
@@ -131,6 +137,16 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#modalUsuarioNuevo").modal("show");
   }
 
+  // ABRIR MODAL RESET PASSWORD
+
+  function abrirModalPassword(id) {
+    document.getElementById("reset_id_usuario").value = id;
+
+    document.getElementById("reset_password").value = "";
+
+    $("#modalResetPassword").modal("show");
+  }
+
   // VALIDACIONES
 
   // validaciones para nuevo usuarios
@@ -174,6 +190,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // validaciones para resetear password
+  const formResetPassword = document.getElementById("formResetPassword");
+
+  formResetPassword.addEventListener("submit", (e) => {
+    limpiarErrores(formResetPassword);
+
+    let valido = true;
+
+    valido =
+      validarPassword(document.getElementById("reset_password"), 6, 100) &&
+      valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  //resetear formularios al cerrar modales
+
   $("#modalUsuarioNuevo").on("hidden.bs.modal", function () {
     resetearFormulario("formNuevoUsuario");
   });
@@ -183,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Escuchador para botones de editar
+  //eventos
 
   document.addEventListener("click", (event) => {
     const btn = event.target.closest(".btn-editar");
@@ -192,6 +228,16 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     abrirModalEditar(btn.dataset.id);
+  });
+
+  document.addEventListener("click", (event) => {
+    const btn = event.target.closest(".btn-password");
+
+    if (!btn) return;
+
+    event.preventDefault();
+
+    abrirModalPassword(btn.dataset.id);
   });
 
   async function init() {

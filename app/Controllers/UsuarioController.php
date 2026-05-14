@@ -148,5 +148,45 @@ class UsuarioController extends Controller {
         }
     }
 
-    
+    public function olvidePassword() {
+
+        try {
+
+            $params = [
+                'rol' => 0
+            ];
+
+            require __DIR__ . '/../templates/usuarios/olvidePassword.php';
+
+        } catch (Throwable $e) {
+
+            $this->handleError($e);
+
+        }
+    }
+
+    public function resetearPassword() {
+
+        try {
+
+            $idUsuario = $_POST['id_usuario'];
+
+            $passwordNueva = $_POST['password_nueva'];
+
+            $passwordHash = password_hash($passwordNueva, PASSWORD_DEFAULT);
+
+            $modelo = new Usuario();
+
+            $modelo->updatePassword($idUsuario, $passwordHash);
+
+            header('Location: index.php?ctl=usuarios');
+            exit;
+
+        } catch (Throwable $e) {
+
+            $this->handleError($e);
+
+        }
+    }
+
 }
