@@ -75,16 +75,46 @@ class ClienteController extends Controller {
 
     
 
-    public function editarCliente() {
+        public function editarCliente() {
+
         try {
+
             $id = $_POST['id_cliente'];
+
             $modelo = new Cliente();
-            $modelo->update($id, $_POST);
+
+            $datos = [
+
+                'nombre'            => $_POST['nombre'],
+                'apellido1'         => $_POST['apellido1'],
+                'apellido2'         => $_POST['apellido2'],
+                'documento'         => $_POST['documento'],
+                'email'             => $_POST['email'],
+                'telefono'          => $_POST['telefono'],
+                'fecha_nacimiento'  => $_POST['fecha_nacimiento'] ?: null,
+                'direccion'         => $_POST['direccion'],
+                'cp'                => $_POST['cp'],
+                'ciudad'            => $_POST['ciudad'],
+                'pais'              => $_POST['pais'],
+                'id_metodo_pago'    => $_POST['id_metodo_pago'],
+                'id_impuesto'       => $_POST['id_impuesto'],
+                'credito'           => $_POST['credito'],
+                'id_estado'         => $_POST['id_estado'],
+                'fecha_alta'        => $_POST['fecha_alta'] ?: null,
+                'fecha_baja'        => $_POST['fecha_baja'] === '-' ? null : $_POST['fecha_baja'],
+                'id_usuario'        => $_POST['id_usuario']
+
+            ];
+
+            $modelo->update($id, $datos);
 
             header('Location: index.php?ctl=clientes');
             exit;
+
         } catch (Throwable $e) {
+
             $this->handleError($e);
+
         }
     }
     public function guardarCliente() {

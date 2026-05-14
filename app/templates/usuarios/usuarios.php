@@ -61,7 +61,7 @@
 
             <div class="modal-content">
 
-                <form method="POST" action="index.php?ctl=guardarUsuario">
+                <form id= "formNuevoUsuario" method="POST" action="index.php?ctl=guardarUsuario">
 
                     <div class="modal-header">
                         <h5 class="modal-title">Nuevo Usuario</h5>
@@ -114,7 +114,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form method="POST" action="index.php?ctl=editarUsuario">
+                <form  id="formEditarUsuario" method="POST" action="index.php?ctl=editarUsuario">
 
                     <input type="hidden"
                         name="id_usuario"
@@ -137,6 +137,10 @@
                         <button type="submit"
                                 class="btn btn-success">
                             Guardar
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cerrar
                         </button>
 
                     </div>

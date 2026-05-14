@@ -131,6 +131,59 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#modalUsuarioNuevo").modal("show");
   }
 
+  // VALIDACIONES
+
+  // validaciones para nuevo usuarios
+  const formNuevoUsuario = document.getElementById("formNuevoUsuario");
+
+  formNuevoUsuario.addEventListener("submit", (e) => {
+    limpiarErrores(formNuevoUsuario);
+
+    let valido = true;
+
+    valido =
+      validarTexto(document.getElementById("nuevo_nombre"), 3, 50) && valido;
+    valido = validarEmail(document.getElementById("nuevo_email")) && valido;
+    valido =
+      validarTexto(document.getElementById("nuevo_password"), 6, 100) && valido;
+    valido = validarSelect(document.getElementById("nuevo_rol")) && valido;
+    valido = validarSelect(document.getElementById("nuevo_estado")) && valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  // validaciones para editar usuarios
+
+  const formEditarUsuario = document.getElementById("formEditarUsuario");
+
+  formEditarUsuario.addEventListener("submit", (e) => {
+    limpiarErrores(formEditarUsuario);
+
+    let valido = true;
+
+    valido =
+      validarTexto(document.getElementById("edit_nombre"), 3, 50) && valido;
+    valido = validarEmail(document.getElementById("edit_email")) && valido;
+    valido = validarSelect(document.getElementById("edit_rol")) && valido;
+    valido = validarSelect(document.getElementById("edit_id_estado")) && valido;
+
+    if (!valido) {
+      e.preventDefault();
+    }
+  });
+
+  $("#modalUsuarioNuevo").on("hidden.bs.modal", function () {
+    resetearFormulario("formNuevoUsuario");
+  });
+
+  $("#modalUsuarioEditar").on("hidden.bs.modal", function () {
+    resetearFormulario("formEditarUsuario");
+  });
+
+  // Escuchador para botones de editar
+
   document.addEventListener("click", (event) => {
     const btn = event.target.closest(".btn-editar");
 

@@ -59,6 +59,12 @@
                             </a>
                         </div>
 
+                        <div class="text-center">
+                            <a class="small" href="index.php?ctl=restablecerPassword">
+                                ¿Has olvidado tu contraseña?
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>

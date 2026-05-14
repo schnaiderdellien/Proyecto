@@ -56,7 +56,15 @@ class UsuarioController extends Controller {
         try {
 
             $modelo = new Usuario();
-            $modelo->insert($_POST);
+
+            $datos = [
+                'nombre' => $_POST['nombre'],
+                'email' => $_POST['email'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'id_rol' => $_POST['id_rol'],
+                'id_estado' => $_POST['id_estado']
+            ];
+            $modelo->insert($datos);
 
             header('Location: index.php?ctl=usuarios');
             exit;
@@ -72,7 +80,13 @@ class UsuarioController extends Controller {
             $id = $_POST['id_usuario'];
 
             $modelo = new Usuario();
-            $modelo->update($id, $_POST);
+            $datos = [
+                'nombre' => $_POST['nombre'],
+                'email' => $_POST['email'],
+                'id_rol' => $_POST['id_rol'],
+                'id_estado' => $_POST['id_estado']
+            ];
+            $modelo->update($id, $datos);
 
             header('Location: index.php?ctl=usuarios');
             exit;

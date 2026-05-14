@@ -1,16 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const formulario = document.querySelector("form");
+  const formulario = document.getElementById("formCambiarPassword");
 
-  formulario.addEventListener("submit", (event) => {
-    const passwordNueva = document.getElementById("password_nueva").value;
+  formulario.addEventListener("submit", (e) => {
+    limpiarErrores(formulario);
 
-    const passwordConfirmar =
-      document.getElementById("password_confirmar").value;
+    let valido = true;
 
-    if (passwordNueva !== passwordConfirmar) {
-      event.preventDefault();
+    // Validamos la contraseña actual
 
-      alert("Las contraseñas no coinciden");
+    valido =
+      validarPassword(document.getElementById("password_actual"), 6, 100) &&
+      valido;
+
+    // Validamos la nueva contraseña
+
+    valido =
+      validarPassword(document.getElementById("password_nueva"), 6, 100) &&
+      valido;
+
+    // Confirmar nueva contraseña
+
+    valido =
+      validarPassword(document.getElementById("password_confirmar"), 6, 100) &&
+      valido;
+
+    // Comprobamos las contraseñas nuevas coinciden
+
+    const passwordNueva = document.getElementById("password_nueva");
+
+    const passwordConfirmar = document.getElementById("password_confirmar");
+
+    if (passwordNueva.value !== passwordConfirmar.value) {
+      mostrarError(passwordConfirmar, "Las contraseñas no coinciden");
+
+      valido = false;
+    }
+
+    // SI HAY ERRORES
+
+    if (!valido) {
+      e.preventDefault();
     }
   });
 });

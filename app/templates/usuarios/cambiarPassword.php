@@ -22,38 +22,24 @@
 
             <div class="card-body">
 
-                <form method="POST"
-                      action="index.php?ctl=guardarPassword">
+                <form id="formCambiarPassword" method="POST"action="index.php?ctl=guardarPassword">
 
                     <p>
                         <b>Contraseña actual:</b>
-                        <input type="password"
-                               name="password_actual"
-                               id="password_actual"
-                               class="form-control mb-3"
-                               placeholder="Contraseña actual">
+                        <input type="password" name="password_actual"id="password_actual" class="form-control mb-3"placeholder="Contraseña actual">
                     </p>
 
                     <p>
                         <b>Nueva contraseña:</b>
-                        <input type="password"
-                               name="password_nueva"
-                               id="password_nueva"
-                               class="form-control mb-3"
-                               placeholder="Nueva contraseña">
+                        <input type="password" name="password_nueva" id="password_nueva"class="form-control mb-3" placeholder="Nueva contraseña">
                     </p>
 
                     <p>
                         <b>Confirmar contraseña:</b>
-                        <input type="password"
-                               name="password_confirmar"
-                               id="password_confirmar"
-                               class="form-control mb-3"
-                               placeholder="Confirmar contraseña">
+                        <input type="password"  name="password_confirmar" id="password_confirmar" class="form-control mb-3" placeholder="Confirmar contraseña">
                     </p>
 
-                    <button type="submit"
-                            class="btn btn-primary">
+                    <button type="submit"class="btn btn-primary">
                         Guardar contraseña
                     </button>
 
