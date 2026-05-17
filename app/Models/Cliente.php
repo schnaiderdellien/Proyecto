@@ -168,5 +168,28 @@ class Cliente {
         }
     }
 
+    // Método para obtener el total de clientes
+        public function totalClientes(): int {
+
+        $sql = "SELECT COUNT(*) as total FROM clientes WHERE id_estado = 1";
+
+        $stmt = $this->conexion->query($sql);
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return (int)$resultado['total'];
+    }
+        // Método para obtener el total de clientes inactivos
+        public function totalClientesInactivos(): int {
+
+        $sql = "SELECT COUNT(*) as totalInactivos FROM clientes WHERE id_estado = 2";
+
+        $stmt = $this->conexion->query($sql);
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return (int)$resultado['totalInactivos'];
+    }
+
 }
 

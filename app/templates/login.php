@@ -16,7 +16,7 @@
 
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">
-                                <img src="/proyecto/web/assets/img/logoDellienNegro.png"
+                                <img src="/proyecto/web/assets/img/logoDellien.png"
                                 alt="CRM DAW"
                                 style="height: 40px;">
                             </h1>

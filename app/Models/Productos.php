@@ -137,7 +137,28 @@ class Productos {
             throw $e;
         }
     }
-    
+
+    //función para contar el total de productos
+    public function totalProductos(): int {
+        try {
+            $sql = "SELECT COUNT(*) AS total FROM productos WHERE id_estado = 1";
+            $stmt = $this->conexion->query($sql);
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$resultado['total'];
+        } catch (Throwable $e) {
+            throw $e;}
+    }
+    //función para contar el total de productos inactivos
+        public function totalProductosInactivos(): int {
+        try {
+            $sql = "SELECT COUNT(*) AS totalProductosInactivos FROM productos WHERE id_estado = 2";
+            $stmt = $this->conexion->query($sql);
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$resultado['totalProductosInactivos'];
+        } catch (Throwable $e) {
+            throw $e;}
+    }
+
 }
 
 ?> 

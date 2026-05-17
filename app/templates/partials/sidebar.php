@@ -51,14 +51,6 @@
         </a>
     </li>
 
-    <!-- Facturas -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.php?ctl=facturas">
-            <i class="fas fa-fw fa-file-invoice"></i>
-            <span>Facturación</span>
-        </a>
-    </li>
-
     <hr class="sidebar-divider">
 
     <?php if (($_SESSION['usuarioNivel'] ?? 0) == 4): ?>

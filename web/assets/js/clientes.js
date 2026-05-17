@@ -166,6 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
     paginar(filtrados);
   });
 
+  // filtro por teléfono
+
   buscadorTel.addEventListener("keyup", () => {
     const numero = buscadorTel.value.toLowerCase();
 
@@ -175,6 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
     paginaActual = 1;
     paginar(filtrados);
   });
+
+  // filtro por estado
 
   filtroEstado.addEventListener("change", () => {
     const estado = filtroEstado.value;

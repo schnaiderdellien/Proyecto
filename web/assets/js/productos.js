@@ -135,6 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
   buscador.addEventListener("keyup", () => {
     const texto = buscador.value.toLowerCase();
 
+    // filtro por productos
+
     productosFiltrados = productos.filter(
       (p) =>
         p.sku.toLowerCase().includes(texto) ||
@@ -145,6 +147,8 @@ document.addEventListener("DOMContentLoaded", () => {
     paginar(productosFiltrados);
   });
 
+  // filtro por precio
+
   buscadorPrecio.addEventListener("keyup", () => {
     const numero = buscadorPrecio.value;
 
@@ -154,6 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
     paginaActual = 1;
     paginar(productosFiltrados);
   });
+
+  // filtro por estados
 
   filtroEstado.addEventListener("change", () => {
     const estado = filtroEstado.value;

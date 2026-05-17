@@ -53,6 +53,14 @@ $map = [
     'guardarProducto' => ['controller' => 'ProductosController','action' => 'guardarProducto','nivel' => 3],
     'editarProducto' => ['controller' => 'ProductosController','action' => 'editarProducto','nivel' => 3],
 
+    'pedidos' => ['controller' => 'PedidosController', 'action' => 'pedidos', 'nivel' => 1],
+    'api_pedidos'  => ['controller' => 'PedidosController',   'action' => 'apiPedidos',  'nivel' => 1],
+    'api_estados_pedido'  => ['controller' => 'PedidosController',   'action' => 'apiEstadosPedido',  'nivel' => 1],
+    'editarPedido' => ['controller' => 'PedidosController', 'action' => 'editarPedido', 'nivel' => 3],
+    'api_pedido_by_id' => ['controller' => 'PedidosController', 'action' => 'apiPedidoById', 'nivel' => 1],
+    'guardarPedido' => ['controller' => 'PedidosController', 'action' => 'guardarPedido', 'nivel' => 1],
+    'verPedido' => ['controller' => 'PedidosController', 'action' => 'verPedido', 'nivel' => 1],
+
 
     'usuarios' => ['controller' => 'UsuarioController', 'action' => 'usuarios', 'nivel' => 4],
     'api_usuarios' => ['controller' => 'UsuarioController', 'action' => 'apiUsuarios', 'nivel' => 4],
