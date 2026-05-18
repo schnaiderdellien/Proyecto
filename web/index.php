@@ -47,6 +47,7 @@ $map = [
     'api_impuestos'  => ['controller' => 'ClienteController',   'action' => 'apiImpuestos',  'nivel' => 1],
     'editarCliente' => ['controller' => 'ClienteController', 'action' => 'editarCliente', 'nivel' => 3],
     'guardarCliente' => ['controller' => 'ClienteController', 'action' => 'guardarCliente', 'nivel' => 3],
+    'crearPedido' => ['controller' => 'PedidosController', 'action' => 'crearPedido', 'nivel' => 3],
 
     'productos' => ['controller' => 'ProductosController', 'action' => 'productos', 'nivel' => 1],
     'api_productos'  => ['controller' => 'ProductosController',   'action' => 'apiProductos',  'nivel' => 1],
@@ -60,6 +61,8 @@ $map = [
     'api_pedido_by_id' => ['controller' => 'PedidosController', 'action' => 'apiPedidoById', 'nivel' => 1],
     'guardarPedido' => ['controller' => 'PedidosController', 'action' => 'guardarPedido', 'nivel' => 1],
     'verPedido' => ['controller' => 'PedidosController', 'action' => 'verPedido', 'nivel' => 1],
+    'nuevoPedido' => ['controller' => 'PedidosController', 'action' => 'nuevoPedido', 'nivel' => 3],
+    'api_nuevo_pedido' => ['controller' => 'PedidosController', 'action' => 'apiNuevoPedido', 'nivel' => 3],
 
 
     'usuarios' => ['controller' => 'UsuarioController', 'action' => 'usuarios', 'nivel' => 4],

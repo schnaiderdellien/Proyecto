@@ -151,6 +151,87 @@ class PedidosController extends Controller {
         }
     }
 
+        public function nuevoPedido() {
+
+        try {
+
+            $params = [
+                'js' => 'nuevoPedido.js',
+                'rol' => $this->session->getUserLevel()
+            ];
+
+            require __DIR__
+                . '/../templates/pedidos/nuevoPedido.php';
+
+        } catch (Throwable $e) {
+
+            $this->handleError($e);
+        }
+    }
+
+        public function apiNuevoPedido() {
+
+        try {
+
+            header('Content-Type: application/json');
+
+            $modelo = new Pedido();
+
+            $numeroPedido =
+                $modelo->getSiguienteNumeroPedido();
+
+            echo json_encode([
+
+                'numero_pedido' =>
+                    $numeroPedido,
+
+                'fecha_pedido' =>
+                    date('Y-m-d'),
+
+                'id_estado_pedido' => 1
+            ]);
+
+        } catch (Throwable $e) {
+
+            $this->handleError($e);
+        }
+    }
+
+        public function crearPedido() {
+
+        try {
+
+            header('Content-Type: application/json');
+
+            $data = json_decode(
+                file_get_contents("php://input"),
+                true
+            );
+
+            $modelo = new Pedido();
+
+            $idPedido =
+                $modelo->crearPedido($data);
+
+            echo json_encode([
+
+                'success' => true,
+
+                'id_pedido' => $idPedido
+            ]);
+
+        } catch (Throwable $e) {
+
+            echo json_encode([
+
+                'success' => false,
+
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+    
+
 }
 
 

@@ -163,8 +163,7 @@ class Pedido {
             $fechaEnvio = null;
 
 
-            $pedidoActual =
-                $this->getById($data['id_pedido'], $data['id_usuario'], $data['rol']);
+            $pedidoActual = $this->getById($data['id_pedido'],$data['id_usuario'],4);
 
             $fechaConfirmacion =
                 $pedidoActual['fecha_confirmacion'];
@@ -410,6 +409,263 @@ class Pedido {
             $this->conexion->commit();
 
             return true;
+
+        } catch (Throwable $e) {
+
+            $this->conexion->rollBack();
+
+            throw $e;
+        }
+    }
+    
+
+        // Función para generar el siguiente número de pedido
+
+        public function getSiguienteNumeroPedido(): string {
+
+            $sql = "SELECT numero_pedido
+                    FROM Pedidos
+                    ORDER BY id_pedido DESC
+                    LIMIT 1";
+
+            $stmt = $this->conexion->query($sql);
+
+            $ultimo =
+                $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$ultimo) {
+
+                return 'PED-' . date('Y') . '-00001';
+            }
+
+            // EXTRAER NÚMERO
+
+            $numeroActual =
+                (int) substr(
+                    $ultimo['numero_pedido'],
+                    -5
+                );
+
+            $nuevoNumero =
+                $numeroActual + 1;
+
+            return 'PED-'
+                . date('Y')
+                . '-'
+                . str_pad(
+                    $nuevoNumero,
+                    5,
+                    '0',
+                    STR_PAD_LEFT
+                );
+        }
+
+        public function crearPedido(array $data): int {
+
+        try {
+
+            $this->conexion->beginTransaction();
+
+            // FECHAS
+
+            $fechaConfirmacion = null;
+
+            $fechaPreparacion = null;
+
+            $fechaCierre = null;
+
+            $fechaEnvio = null;
+
+            if ($data['id_estado_pedido'] == 2) {
+
+                $fechaConfirmacion = date('Y-m-d');
+            }
+
+            if ($data['id_estado_pedido'] == 3) {
+
+                $fechaPreparacion = date('Y-m-d');
+            }
+
+            if ($data['id_estado_pedido'] == 4) {
+
+                $fechaCierre = date('Y-m-d');
+            }
+
+            if ($data['id_estado_pedido'] == 5) {
+
+                $fechaEnvio = date('Y-m-d');
+            }
+
+            // INSERT PEDIDO
+
+            $sql = "
+
+                INSERT INTO Pedidos (
+
+                    numero_pedido,
+                    id_cliente,
+                    id_usuario,
+                    fecha_pedido,
+                    id_estado_pedido,
+                    id_metodo_pago,
+                    bruto,
+                    descuento,
+                    id_impuesto,
+                    total,
+                    notas,
+                    fecha_confirmacion,
+                    fecha_preparacion,
+                    fecha_cierre,
+                    fecha_envio
+
+                ) VALUES (
+
+                    :numero_pedido,
+                    :id_cliente,
+                    :id_usuario,
+                    :fecha_pedido,
+                    :id_estado_pedido,
+                    :id_metodo_pago,
+                    :bruto,
+                    :descuento,
+                    :id_impuesto,
+                    :total,
+                    :notas,
+                    :fecha_confirmacion,
+                    :fecha_preparacion,
+                    :fecha_cierre,
+                    :fecha_envio
+                )
+            ";
+
+            $stmt =
+                $this->conexion->prepare($sql);
+
+            $stmt->execute([
+
+                ':numero_pedido' =>
+                    $data['numero_pedido'],
+
+                ':id_cliente' =>
+                    $data['id_cliente'],
+
+                ':id_usuario' =>
+                    $data['id_usuario'],
+
+                ':fecha_pedido' =>
+                    $data['fecha_pedido'],
+
+                ':id_estado_pedido' =>
+                    $data['id_estado_pedido'],
+
+                ':id_metodo_pago' =>
+                    $data['id_metodo_pago'],
+
+                ':bruto' =>
+                    $data['bruto'],
+
+                ':descuento' =>
+                    $data['descuento'],
+
+                ':id_impuesto' =>
+                    $data['id_impuesto'],
+
+                ':total' =>
+                    $data['total'],
+
+                ':notas' =>
+                    $data['notas'],
+
+                ':fecha_confirmacion' =>
+                    $fechaConfirmacion,
+
+                ':fecha_preparacion' =>
+                    $fechaPreparacion,
+
+                ':fecha_cierre' =>
+                    $fechaCierre,
+
+                ':fecha_envio' =>
+                    $fechaEnvio
+            ]);
+
+            // ID NUEVO PEDIDO
+
+            $idPedido =
+                $this->conexion->lastInsertId();
+
+            // INSERT DETALLE
+
+            foreach ($data['lineas'] as $linea) {
+
+                $subtotal =
+                    $linea['cantidad']
+                    * $linea['precio_unitario'];
+
+                $total =
+                    $subtotal
+                    - $linea['descuento'];
+
+                $sqlDetalle = "
+
+                    INSERT INTO Detalle_pedidos (
+
+                        id_pedido,
+                        id_productos,
+                        cantidad,
+                        cantidad_servida,
+                        precio_unitario,
+                        subtotal,
+                        descuento,
+                        total
+
+                    ) VALUES (
+
+                        :id_pedido,
+                        :id_productos,
+                        :cantidad,
+                        :cantidad_servida,
+                        :precio_unitario,
+                        :subtotal,
+                        :descuento,
+                        :total
+                    )
+                ";
+
+                $stmtDetalle =
+                    $this->conexion->prepare($sqlDetalle);
+
+                $stmtDetalle->execute([
+
+                    ':id_pedido' =>
+                        $idPedido,
+
+                    ':id_productos' =>
+                        $linea['id_productos'],
+
+                    ':cantidad' =>
+                        $linea['cantidad'],
+
+                    ':cantidad_servida' =>
+                        $linea['cantidad_servida'],
+
+                    ':precio_unitario' =>
+                        $linea['precio_unitario'],
+
+                    ':subtotal' =>
+                        $subtotal,
+
+                    ':descuento' =>
+                        $linea['descuento'],
+
+                    ':total' =>
+                        $total
+                ]);
+            }
+
+            $this->conexion->commit();
+
+            return (int)$idPedido;
 
         } catch (Throwable $e) {
 

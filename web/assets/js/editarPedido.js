@@ -323,13 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <td class="text-nowrap">
 
-                    <!-- GUARDAR -->
-
-                    <button class="btn btn-warning btn-sm btn-guardar-linea">
-
-                        <i class="fas fa-save"></i>
-
-                    </button>
 
                     <!-- BORRAR -->
 
@@ -572,89 +565,86 @@ document.addEventListener("DOMContentLoaded", () => {
   // AÑADIR LINEA
 
   document.getElementById("btnAgregarLinea").addEventListener("click", () => {
-    tablaDetalle.innerHTML += `
+    const fila = document.createElement("tr");
 
-            <tr data-new="1">
+    fila.dataset.new = "1";
 
-                <td>
+    fila.innerHTML = `
 
-                      <input type="text"
-                            class="form-control sku"
-                            list="lista-skus"
-                            placeholder="SKU">
+        <td>
 
-                </td>
+            <input type="text"
+                   class="form-control sku"
+                   list="lista-skus"
+                   placeholder="SKU">
 
-                <td>
+        </td>
 
-                      <input type="text"
-                            class="form-control producto"
-                            list="lista-productos"
-                            placeholder="Producto">
+        <td>
 
-                </td>
+            <input type="text"
+                   class="form-control producto"
+                   list="lista-productos"
+                   placeholder="Producto">
 
-                <td>
+        </td>
 
-                    <input type="number"
-                           class="form-control cantidad"
-                           value="1">
+        <td>
 
-                </td>
+            <input type="number"
+                   class="form-control cantidad"
+                   value="1">
 
-                <td>
+        </td>
 
-                    <input type="number"
-                           class="form-control cantidad-servida"
-                           value="0">
+        <td>
 
-                </td>
+            <input type="number"
+                   class="form-control cantidad-servida"
+                   value="0">
 
-                <td>
+        </td>
 
-                    <input type="number"
-                           step="0.01"
-                           class="form-control precio"
-                           value="0">
+        <td>
 
-                </td>
+            <input type="number"
+                   step="0.01"
+                   class="form-control precio"
+                   value="0">
 
-                <td>
+        </td>
 
-                    <input type="number"
-                           step="0.01"
-                           class="form-control descuento"
-                           value="0">
+        <td>
 
-                </td>
+            <input type="number"
+                   step="0.01"
+                   class="form-control descuento"
+                   value="0">
 
-                <td>
+        </td>
 
-                    <input type="text"
-                           class="form-control total-linea"
-                           value="0.00 €"
-                           readonly>
+        <td>
 
-                </td>
+            <input type="text"
+                   class="form-control total-linea"
+                   value="0.00 €"
+                   readonly>
 
-                <td class="text-nowrap">
+        </td>
 
-                    <button class="btn btn-warning btn-sm btn-guardar-linea">
+        <td class="text-nowrap">
 
-                        <i class="fas fa-save"></i>
+            <button class="btn btn-danger btn-sm btn-borrar-linea">
 
-                    </button>
+                <i class="fas fa-trash"></i>
 
-                    <button class="btn btn-danger btn-sm btn-borrar-linea">
+            </button>
 
-                        <i class="fas fa-trash"></i>
+        </td>
 
-                    </button>
+    `;
 
-                </td>
-
-            </tr>
-            `;
+    tablaDetalle.appendChild(fila);
   });
 
   //guardar pedido
