@@ -366,6 +366,66 @@ class Pedido {
                 continue;
             }
 
+            // OBTENER CANTIDAD SERVIDA ANTERIOR
+
+                $sqlAnterior = "
+
+                    SELECT cantidad_servida, id_productos
+
+                    FROM Detalle_pedidos
+
+                    WHERE id_detalle_pedido = :id
+
+                ";
+
+                $stmtAnterior =
+                    $this->conexion->prepare($sqlAnterior);
+
+                $stmtAnterior->execute([
+                    ':id' => $linea['id_detalle_pedido']
+                ]);
+
+                $lineaAnterior =
+                    $stmtAnterior->fetch(PDO::FETCH_ASSOC);
+
+                // DIFERENCIA SERVIDA
+
+                $servidaAnterior =
+                    (float)$lineaAnterior['cantidad_servida'];
+
+                $servidaNueva =
+                    (float)$linea['cantidad_servida'];
+
+                $diferenciaServida =
+                    $servidaNueva - $servidaAnterior;
+
+                // DESCONTAR STOCK SOLO SI HAY MÁS UNIDADES SERVIDAS
+
+                if ($diferenciaServida > 0) {
+
+                    $sqlStock = "
+
+                        UPDATE Productos
+
+                        SET stock = stock - :cantidad
+
+                        WHERE id_productos = :id_producto
+
+                    ";
+
+                    $stmtStock =
+                        $this->conexion->prepare($sqlStock);
+
+                    $stmtStock->execute([
+
+                        ':cantidad' =>
+                            $diferenciaServida,
+
+                        ':id_producto' =>
+                            $lineaAnterior['id_productos']
+                    ]);
+                }
+
                 $sqlLinea = "UPDATE Detalle_pedidos SET
 
                                 cantidad = :cantidad,
@@ -674,5 +734,31 @@ class Pedido {
             throw $e;
         }
     }
+
+        // Método para obtener el total de pedidos
+        public function totalPedidos(): int {
+
+        $sql = "SELECT COUNT(*) as totalPedidos FROM Pedidos";
+
+        $stmt = $this->conexion->query($sql);
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return (int)$resultado['totalPedidos'];
+    }
+
+        // Método para sumar el total de pedidos
+        public function sumaTotalPedidos(): int {
+
+        $sql = "SELECT SUM(total) as sumaTotalPedidos FROM Pedidos";
+
+        $stmt = $this->conexion->query($sql);
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return (int)$resultado['sumaTotalPedidos'];
+    }
+
+
 }
 ?> 

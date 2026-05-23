@@ -37,7 +37,7 @@ class ClienteController extends Controller {
         }
     }
 
-//API Para traer los comerciales
+    //API Para traer los comerciales
 
     public function apiComerciales() {
         try {
