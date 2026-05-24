@@ -12,7 +12,7 @@ class Pedido {
         if ((int)$rol === 3 || (int)$rol === 4) {
              $sql = "SELECT p.*, c.nombreCliente, u.nombre AS comercial, ep.estado
                 FROM Pedidos p
-                JOIN Clientes c 
+                JOIN clientes c 
                     ON p.id_cliente = c.id_cliente
                 JOIN Usuarios u 
                     ON p.id_usuario = u.id_usuario
@@ -26,7 +26,7 @@ class Pedido {
 
                 $sql = "SELECT p.*, c.nombreCliente, u.nombre AS comercial, ep.estado
                 FROM Pedidos p
-                JOIN Clientes c 
+                JOIN clientes c 
                     ON p.id_cliente = c.id_cliente
                 JOIN Usuarios u 
                     ON p.id_usuario = u.id_usuario
@@ -64,7 +64,7 @@ class Pedido {
 
                     FROM Pedidos p
 
-                    JOIN Clientes c
+                    JOIN clientes c
                         ON p.id_cliente = c.id_cliente
 
                     JOIN Usuarios u
@@ -100,7 +100,7 @@ class Pedido {
 
                     FROM Pedidos p
 
-                    JOIN Clientes c
+                    JOIN clientes c
                         ON p.id_cliente = c.id_cliente
 
                     JOIN Usuarios u

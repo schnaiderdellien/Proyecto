@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /****
  * Librería con funciones generales y de validación

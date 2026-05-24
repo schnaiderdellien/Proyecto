@@ -12,7 +12,7 @@ class User{
 
     public function findByEmail(string $email): ?array{
         
-            $sql = "SELECT * FROM usuarios WHERE email = :email LIMIT 1";
+            $sql = "SELECT * FROM Usuarios WHERE email = :email LIMIT 1";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([':email'=>$email]);
             
@@ -27,7 +27,7 @@ class User{
 
     public function updateLastLogin(int $id): void {
         
-        $sql = "UPDATE usuarios SET ultimo_login = NOW() WHERE id_usuario = :id";
+        $sql = "UPDATE Usuarios SET ultimo_login = NOW() WHERE id_usuario = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute(['id'=>$id]);
     }

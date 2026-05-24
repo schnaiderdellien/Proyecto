@@ -11,7 +11,7 @@ class Usuario {
 
     public function getAll(): array {
 
-        $sql = "SELECT u.*, r.rol AS rol_nombre FROM usuarios u LEFT JOIN Rol r ON u.id_rol = r.id_rol ORDER BY u.id_usuario ASC";
+        $sql = "SELECT u.*, r.rol AS rol_nombre FROM Usuarios u LEFT JOIN Rol r ON u.id_rol = r.id_rol ORDER BY u.id_usuario ASC";
 
         $stmt = $this->conexion->query($sql);
 
@@ -73,7 +73,7 @@ class Usuario {
 
     public function getById(int $id): array|false {
 
-    $sql = "SELECT * FROM usuarios WHERE id_usuario = :id";
+    $sql = "SELECT * FROM Usuarios WHERE id_usuario = :id";
 
     $stmt = $this->conexion->prepare($sql);
 

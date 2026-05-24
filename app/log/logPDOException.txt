@@ -1,0 +1,33 @@
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dellien.usuarios' doesn't exist | 0.39931500 1779580707
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dellien.usuarios' doesn't exist | 0.11209100 1779580710
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dellien.usuarios' doesn't exist | 0.18896700 1779580713
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dellien.usuarios' doesn't exist | 0.84189300 1779580739
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.66013200 1779582059
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.90028100 1779584286
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.56817900 1779584336
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.95077100 1779584372
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.13580700 1779584398
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.97191400 1779584849
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'192.168.16.4' (using password: NO) | 0.61050100 1779585043
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.88546800 1779585360
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.38159200 1779585750
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.70372200 1779585752
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.05373500 1779585757
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.Clientes' doesn't exist | 0.85105800 1779585758
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.06903300 1779585761
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.Clientes' doesn't exist | 0.53933100 1779585762
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.42670100 1779585764
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.60085800 1779585765
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.75742000 1779585864
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.29839300 1779585867
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.69965600 1779585970
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.61851500 1779585973
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.49477300 1779585977
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.Clientes' doesn't exist | 0.02019200 1779585979
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.51220300 1779585981
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.33678800 1779586091
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.65257100 1779586180
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.Clientes' doesn't exist | 0.35720100 1779586182
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.77283600 1779586208
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.26049800 1779586349
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.49005700 1779586352

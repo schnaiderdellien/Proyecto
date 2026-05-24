@@ -12,10 +12,10 @@ class Cliente {
     
             // Ver todo
             if ($rol == 3 || $rol == 4) {
-                //$sql = "SELECT * FROM clientes c JOIN usuarios u ON c.id_usuario = u.id_usuario ORDER BY id_cliente ASC";
+                //$sql = "SELECT * FROM clientes c JOIN Usuarios u ON c.id_usuario = u.id_usuario ORDER BY id_cliente ASC";
                 $sql = "SELECT c.*, u.nombre as nombre_comercial, i.impuesto as nombre_impuesto, p.metodo_pago as nombre_metodo_pago 
                         FROM clientes c 
-                        JOIN usuarios u ON c.id_usuario = u.id_usuario
+                        JOIN Usuarios u ON c.id_usuario = u.id_usuario
                         JOIN Impuestos i ON c.id_impuesto = i.id_impuesto
                         JOIN Metodo_pago p ON c.id_metodo_pago = p.id_metodo_pago
                         ORDER BY c.id_cliente ASC";
@@ -28,7 +28,7 @@ class Cliente {
                         i.impuesto as nombre_impuesto,
                         p.metodo_pago as nombre_metodo_pago
                     FROM clientes c
-                    JOIN usuarios u ON c.id_usuario = u.id_usuario
+                    JOIN Usuarios u ON c.id_usuario = u.id_usuario
                     JOIN Impuestos i ON c.id_impuesto = i.id_impuesto
                     JOIN Metodo_pago p ON c.id_metodo_pago = p.id_metodo_pago
                     WHERE c.id_usuario = :id

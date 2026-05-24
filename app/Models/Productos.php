@@ -21,7 +21,7 @@ class Productos {
 
         try {
 
-            $sql = "INSERT INTO productos (
+            $sql = "INSERT INTO Productos (
 
                         sku,
                         nombre,
@@ -88,7 +88,7 @@ class Productos {
 
         try {
 
-            $sql = "UPDATE productos SET
+            $sql = "UPDATE Productos SET
 
                         sku = :sku,
                         nombre = :nombre,
@@ -141,7 +141,7 @@ class Productos {
     //función para contar el total de productos
     public function totalProductos(): int {
         try {
-            $sql = "SELECT COUNT(*) AS total FROM productos WHERE id_estado = 1";
+            $sql = "SELECT COUNT(*) AS total FROM Productos WHERE id_estado = 1";
             $stmt = $this->conexion->query($sql);
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
             return (int)$resultado['total'];
@@ -151,7 +151,7 @@ class Productos {
     //función para contar el total de productos inactivos
         public function totalProductosInactivos(): int {
         try {
-            $sql = "SELECT COUNT(*) AS totalProductosInactivos FROM productos WHERE id_estado = 2";
+            $sql = "SELECT COUNT(*) AS totalProductosInactivos FROM Productos WHERE id_estado = 2";
             $stmt = $this->conexion->query($sql);
             $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
             return (int)$resultado['totalProductosInactivos'];

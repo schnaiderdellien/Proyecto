@@ -16,7 +16,7 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../app/libs/Config.php';
 require_once __DIR__ . '/../app/libs/bGeneral.php';
 require_once __DIR__ . '/../app/libs/bSeguridad.php';
-require_once __DIR__ . '/../app/core/autoload.php';
+require_once __DIR__ . '/../app/Core/autoload.php';
 
 
 // -------------------------------------------------------------
