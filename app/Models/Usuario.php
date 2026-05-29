@@ -22,7 +22,7 @@ class Usuario {
 
     public function insert(array $datos): void {
 
-        $sql = "INSERT INTO usuarios (
+        $sql = "INSERT INTO Usuarios (
                     nombre,
                     email,
                     password,
@@ -53,7 +53,7 @@ class Usuario {
 
     public function update(int $id, array $datos): void {
 
-        $sql = "UPDATE usuarios SET
+        $sql = "UPDATE Usuarios SET
                     nombre = :nombre,
                     email = :email,
                     id_rol = :id_rol,
@@ -90,7 +90,7 @@ class Usuario {
     // Método para cambiar la contraseña de un usuario
     public function updatePassword(int $idUsuario, string $password): void {
 
-        $sql = "UPDATE usuarios
+        $sql = "UPDATE Usuarios
                 SET password = :password
                 WHERE id_usuario = :id_usuario";
 

@@ -184,7 +184,7 @@
                             </select>
                         </p>
                         <p><b>Fecha alta:</b><input type="date"name="fecha_alta"id="edit_fecha_alta" class="form-control mb-2"></p>
-                        <p><b>Fecha baja:</b> <p type="date" name="fecha_baja"id="edit_fecha_baja"class="form-control mb-2"> - </p></p>
+                        <p><b>Fecha baja:</b> <input type="date"name="fecha_baja"id="edit_fecha_baja"class="form-control mb-2"readonly>
 
                     </div>
 

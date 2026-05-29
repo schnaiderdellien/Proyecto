@@ -100,8 +100,8 @@ class ClienteController extends Controller {
                 'id_impuesto'       => $_POST['id_impuesto'],
                 'credito'           => $_POST['credito'],
                 'id_estado'         => $_POST['id_estado'],
-                'fecha_alta'        => $_POST['fecha_alta'] ?: null,
-                'fecha_baja'        => $_POST['fecha_baja'] === '-' ? null : $_POST['fecha_baja'],
+                'fecha_alta'        => isset($_POST['fecha_alta']) && $_POST['fecha_alta'] !== ''? $_POST['fecha_alta']: null,
+                'fecha_baja'        => isset($_POST['fecha_baja'])? ($_POST['fecha_baja'] === '-' ? null : $_POST['fecha_baja']): null,
                 'id_usuario'        => $_POST['id_usuario']
 
             ];
@@ -139,8 +139,8 @@ class ClienteController extends Controller {
                 'id_impuesto'       => $_POST['id_impuesto'],
                 'credito'           => $_POST['credito'],
                 'id_estado'         => $_POST['id_estado'],
-                'fecha_alta'        => $_POST['fecha_alta'] ? : null,
-                'fecha_baja'        => $_POST['fecha_baja'] === '-' ? null : $_POST['fecha_baja'],
+                'fecha_alta'        => isset($_POST['fecha_alta']) && $_POST['fecha_alta'] !== ''? $_POST['fecha_alta']: null,
+                'fecha_baja'        => isset($_POST['fecha_baja']) && $_POST['fecha_baja'] !== '' ? $_POST['fecha_baja']: null,
                 'id_usuario'        => $_POST['id_usuario']
             ];
 
@@ -150,6 +150,11 @@ class ClienteController extends Controller {
             exit;
 
         } catch (Throwable $e) {
+
+            /*echo "<pre>";
+            print_r($e);
+            echo "</pre>";
+            die();*/
             $this->handleError($e);
         }
     }

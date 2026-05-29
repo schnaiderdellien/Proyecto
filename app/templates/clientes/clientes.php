@@ -198,7 +198,7 @@
                         <hr>
                         <p><b>Estado:</b><select name="id_estado" id="edit_estado" class="form-control mb-2"><option value="1">Activo</option><option value="2">Inactivo</option></select></p>
                         <p><b>Fecha alta:</b><input type="text" name="fecha_alta" id="edit_fecha_alta" class="form-control mb-2" placeholder="Fecha alta"></p>
-                        <p><b>Fecha baja:</b><p type="text" name="fecha_baja" id="edit_fecha_baja" class="form-control mb-2" placeholder="Fecha baja">-</p></p>
+                        <p><b>Fecha baja:</b></p><input type="date" name="fecha_baja"id="edit_fecha_baja"class="form-control mb-2"readonly>
                         <p><b>Comercial:</b><select name="id_usuario" id="edit_usuario" class="form-control mb-2"></select></p>
                     </div>
                         <div class="modal-footer">

@@ -99,7 +99,8 @@ $requiredLevel  = $map[$ruta]['nivel'];
 // -------------------------------------------------------------
 if (!$session->hasLevel($requiredLevel)) {
     header("HTTP/1.0 403 Forbidden");
-    echo "<h1>403: No tienes permisos para acceder a esta acción</h1>";
+    header ('Location: index.php?ctl=inicio');
+    
     exit;
 }
 

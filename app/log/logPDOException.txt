@@ -31,3 +31,8 @@ SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.Clientes' doe
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.77283600 1779586208
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.26049800 1779586349
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.49005700 1779586352
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`crm_daw`.`clientes`, CONSTRAINT `fk_clientes_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)) | 0.44622800 1779910013
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`crm_daw`.`clientes`, CONSTRAINT `fk_clientes_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)) | 0.88918600 1779910278
+SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`crm_daw`.`clientes`, CONSTRAINT `fk_clientes_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)) | 0.83720700 1779910359
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.68848900 1780050313
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'crm_daw.usuarios' doesn't exist | 0.30530800 1780050334

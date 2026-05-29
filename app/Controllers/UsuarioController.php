@@ -60,7 +60,7 @@ class UsuarioController extends Controller {
             $datos = [
                 'nombre' => $_POST['nombre'],
                 'email' => $_POST['email'],
-                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'password' => $_POST['password'],
                 'id_rol' => $_POST['id_rol'],
                 'id_estado' => $_POST['id_estado']
             ];

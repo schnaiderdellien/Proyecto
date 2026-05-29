@@ -435,6 +435,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalSinIVA = 0;
 
     document.querySelectorAll("#tabla-detalle tr").forEach((fila) => {
+
+      if(fila.dataset.deleted =="1"){
+        return;
+      }
       const cantidad = parseFloat(fila.querySelector(".cantidad").value) || 0;
 
       const precio = parseFloat(fila.querySelector(".precio").value) || 0;
@@ -502,17 +506,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // BORRAR LINEA
 
   document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".btn-borrar-linea");
 
-    if (!btn) return;
+      const btn = e.target.closest(".btn-borrar-linea");
 
-    const fila = btn.closest("tr");
+      if (!btn) return;
 
-    fila.dataset.deleted = "1";
+      const fila = btn.closest("tr");
 
-    fila.style.display = "none";
+      // Si es una línea nueva, la quitamos del DOM
+      if (fila.dataset.new == "1") {
+          fila.remove();
+          calcularTotales();
+          return;
+      }
 
-    calcularTotales();
+      // Si ya existe en la BD, la marcamos para borrar
+      fila.dataset.deleted = "1";
+      fila.style.display = "none";
+
+      calcularTotales();
   });
 
   // GUARDAR LINEA

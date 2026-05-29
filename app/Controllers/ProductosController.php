@@ -141,7 +141,12 @@ class ProductosController extends Controller {
             exit;
 
         } catch (Throwable $e) {
-            $this->handleError($e);
+
+            echo "<pre>";
+            print_r($e);
+            echo "</pre>";
+            die();
+            /*$this->handleError($e);*/
         }
     }
 
