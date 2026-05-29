@@ -37,10 +37,7 @@ class AuthController extends Controller {
 
             require __DIR__ . '/../templates/login.php';
         } catch (Throwable $e){
-            echo "<pre>";
-            print_r($e);
-            echo "</pre>";
-            die();
+            $this->handleError($e);
         }
     }
     public function logout (){
