@@ -91,25 +91,19 @@
 
     <!-- FEATURES -->
 
-    <section id="features" class="py-5 bg-light">
+    <section id="features" class="py-5 bg-light bg-dark">
 
-        <div class="container">
+        <div class="container bg-dark">
 
             <!-- Titulo funcionalidades -->
 
             <div class="text-center mb-5">
 
-                <h2 class="font-weight-bold text-gray-900">
+                <h2 class="font-weight-bold text-muted">
 
                     Funcionalidades principales
 
                 </h2>
-
-                <p class="text-muted lead">
-
-                    Todo lo necesario para gestionar tu negocio
-
-                </p>
 
             </div>
 
@@ -137,8 +131,8 @@
 
                             <p class="text-muted">
 
-                                Gestiona clientes, contactos, información fiscal
-                                y seguimiento comercial.
+                                Gestiona clientes, contactos e información fiscal
+
 
                             </p>
 
@@ -227,7 +221,7 @@
 
             <div class="text-center mb-5">
 
-                <h2 class="font-weight-bold text-gray-900">
+                <h2 class="font-weight-bold text-muted">
 
                     Plataforma empresarial moderna
 
@@ -257,11 +251,11 @@
 
                     <div class="carousel-item active">
 
-                        <img src="/proyecto/web/assets/img/slide1.jpg"
+                        <img src="/proyecto/web/assets/img/slide1.png"
                             class="d-block w-100"
                             style="height: 500px; object-fit: cover;">
 
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-45 start-0 end-0">
 
                             <h3 class="font-weight-bold">
 
@@ -281,11 +275,11 @@
 
                     <div class="carousel-item">
 
-                        <img src="/proyecto/web/assets/img/slide2.jpg"
+                        <img src="/proyecto/web/assets/img/slide2.png"
                             class="d-block w-100"
                             style="height: 500px; object-fit: cover;">
 
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-45 start-0 end-0">
 
                             <h3 class="font-weight-bold">
 
@@ -305,11 +299,11 @@
 
                     <div class="carousel-item">
 
-                        <img src="/proyecto/web/assets/img/slide3.jpg"
+                        <img src="/proyecto/web/assets/img/slide3.png"
                             class="d-block w-100"
                             style="height: 500px; object-fit: cover;">
 
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-45 start-0 end-0">
 
                             <h3 class="font-weight-bold">
 
@@ -355,7 +349,7 @@
 
     <!-- CTA -->
 
-    <section class="py-5 bg-primary text-white">
+    <section class="py-5 bg-darck text-white">
 
         <div class="container text-center">
 
