@@ -16,7 +16,7 @@ class AuthController extends Controller {
                 $userModel = new User();
                 $usuario = $userModel->findByEmail($email);
 
-                if($usuario && password_verify($password,$usuario['password'])){
+                if($usuario &&  $usuario ['id_estado'] == 1 && password_verify($password,$usuario['password'])){
                     //guardamos la sesión
                     $this->session->login(
                         $usuario['id_usuario'],
